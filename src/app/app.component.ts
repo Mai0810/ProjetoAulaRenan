@@ -2,11 +2,14 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { PortfolioItemComponent } from './portfolio-item/portfolio-item.component';
+import { CadastroFormComponent } from './cadastro-form/cadastro-form.component';
+import { ModalProdutoComponent } from './modal-produto/modal-produto.component';
+import { TabelaDoProdutorComponent } from './tabela-do-produtor/tabela-do-produtor.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LoginComponent, PortfolioItemComponent],
+  imports: [RouterOutlet, LoginComponent, PortfolioItemComponent, CadastroFormComponent, TabelaDoProdutorComponent ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
