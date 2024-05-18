@@ -1,0 +1,56 @@
+<div class="container vh-100">
+  <div class="text-center mb-4">
+    <h1>Produtor</h1>
+    <p>Deseja alterar seu cadastro?</p>
+  </div>
+
+  <form [formGroup]="produtorForm" (ngSubmit)="onSubmit()" class="w-50 mx-auto">
+    <div class="mb-3">
+      <label for="nome" class="form-label">Nome do Produtor</label>
+      <input type="text" class="form-control" id="nome" formControlName="nome">
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" formControlName="email">
+    </div>
+    <div class="mb-3">
+      <label for="senha" class="form-label">Senha</label>
+      <input type="password" class="form-control" id="senha" formControlName="senha">
+    </div>
+    <div class="mb-3">
+      <label for="descricao" class="form-label">Descrição</label>
+      <textarea class="form-control" id="descricao" formControlName="descricao"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="endereco" class="form-label">Endereço</label>
+      <input type="text" class="form-control" id="endereco" formControlName="endereco">
+    </div>
+    <div class="mb-3">
+      <label for="telefone" class="form-label">Telefone</label>
+      <input type="tel" class="form-control" id="telefone" formControlName="telefone">
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary">Alterar</button>
+    </div>
+  </form>
+
+  <!-- Adição do gerenciamento de produtos -->
+  <div class="product-management mt-5 w-50 mx-auto">
+    <h2 class="text-center">Deseja adicionar ou excluir produtos?</h2>
+    <div *ngFor="let produto of produtos; let i = index" class="d-flex justify-content-between align-items-center mb-2">
+      <input type="text" [(ngModel)]="produto.nome" class="form-control me-2" placeholder="Nome do Produto">
+      <input type="text" [(ngModel)]="produto.descricao" class="form-control me-2" placeholder="Descrição">
+      <input type="text" [(ngModel)]="produto.preco" class="form-control me-2" placeholder="Preço">
+      <button (click)="removerProduto(i)" class="btn btn-danger">X</button>
+    </div>
+    <div class="text-center">
+      <button (click)="adicionarProduto()" class="btn btn-success">Adicionar Produto</button>
+      <button (click)="atualizarProdutos()" class="btn btn-primary">Atualizar</button>
+    </div>
+  </div>
+  
+  <div class="text-center mt-4">
+    <button (click)="excluirConta()" class="btn btn-danger">Excluir Conta</button>
+    <button class="btn btn-warning">Sair</button>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+.container-color {
+  background-color: #fff; // Cor de fundo do container
+  text-align: center; // Centraliza o texto
+
+  h1 {
+    margin-bottom: 1rem; // Espaçamento abaixo do título
+  }
+
+  // Estilização específica para os botões de ação
+  .btn {
+    width: 150px; // Largura fixa para todos os botões
+    margin-top: 0.5rem; // Espaçamento acima do botão
+
+    &.btn-danger {
+      background-color: #dc3545; // Cor de fundo para botão de perigo/excluir
+      color: white; // Cor do texto para botão de perigo/excluir
+      &:hover {
+        background-color: darken(#dc3545, 10%); // Escurece a cor do botão no hover
+      }
+    }
+
+    &.btn-warning {
+      background-color: #FFC800; // Cor de fundo para botão de alerta/sair
+      color: white; // Cor do texto para botão de alerta/sair
+      &:hover {
+        background-color: darken(#FFC800, 10%); // Escurece a cor do botão no hover
+      }
+    }
+  }
+
+  // Estilização para a área dos produtores
+  .produtor-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; // Ajustar conforme necessário
+    margin: 0.5rem 0; // Espaçamento vertical entre os itens
+
+    span {
+      flex: 1; // Permite que o texto ocupe o espaço disponível
+      padding-right: 1rem; // Espaçamento à direita do texto
+    }
+  }
+}
