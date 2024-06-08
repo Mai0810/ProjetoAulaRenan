@@ -6,6 +6,7 @@ import { HttpClient, HttpClientModule, HttpStatusCode } from '@angular/common/ht
 import { Usuario } from '../dto/usuario.model';
 import { Router } from '@angular/router';
 import { error } from 'console';
+import { ProdutorLogadoService } from '../services/produtor-logado.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,9 @@ import { error } from 'console';
 export class LoginComponent {
   form: FormGroup; // Definindo o tipo da variável 'form' como FormGroup
 
-    constructor(private formBuilder: FormBuilder, private loginService:LoginService, private router: Router) {
+    constructor(private formBuilder: FormBuilder, private loginService:LoginService, private router: Router,
+      private produtorLogadoService:ProdutorLogadoService
+    ) {
       this.form = this.formBuilder.group({
           email: ['', [Validators.required]],
           senha: ['', [Validators.required]]
@@ -35,6 +38,7 @@ export class LoginComponent {
         this.router.navigate(['/admin']);
       }else {
         // vai pro produtor
+        this.produtorLogadoService.setUsuario(usuario);
         this.router.navigate(['/produtor-logado']);
       }
     }

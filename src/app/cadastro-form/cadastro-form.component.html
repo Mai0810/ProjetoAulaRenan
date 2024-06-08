@@ -7,22 +7,22 @@
         </div>
         <form [formGroup]="registerForm">
           <div class="mb-3">
-            <input type="text" class="form-control" formControlName='nomeProdutor' placeholder="Nome do Produtor" id="producerName">
+            <input type="text" class="form-control" formControlName='NOME' placeholder="Nome do Produtor" id="producerName">
           </div>
           <div class="mb-3">
-            <input type="email" class="form-control" formControlName='email' placeholder="Email" id="email">
+            <input type="email" class="form-control" formControlName='EMAIL' placeholder="Email" id="email">
           </div>
           <div class="mb-3">
-            <input type="password" class="form-control" formControlName='senha' placeholder="Senha" id="password">
+            <input type="password" class="form-control" formControlName='SENHA' placeholder="Senha" id="password">
           </div>
           <div class="mb-3">
-            <textarea class="form-control" placeholder="Descrição" formControlName='descricao' id="description" rows="3"></textarea>
+            <textarea class="form-control" placeholder="Descrição" formControlName='DESCRICAO' id="description" rows="3"></textarea>
           </div>
           <div class="mb-3">
-            <input type="text" class="form-control" formControlName='endereco' placeholder="Endereço" id="address">
+            <input type="text" class="form-control" formControlName='ENDERECO' placeholder="Endereço" id="address">
           </div>
           <div class="mb-3">
-            <input type="tel" class="form-control" formControlName='telefone' placeholder="Telefone" id="phone">
+            <input type="tel" class="form-control" formControlName='TELEFONE' placeholder="Telefone" id="phone">
           </div>
           <button  type="button" (click)="cadastrar()" class="btn btn-dark w-100">CADASTRE-SE</button>
         </form>
