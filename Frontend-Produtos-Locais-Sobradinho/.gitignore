@@ -1,0 +1,47 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Compiled output
+Frontend-Produtos-Locais-Sobradinho/dist
+Frontend-Produtos-Locais-Sobradinho/tmp
+Frontend-Produtos-Locais-Sobradinho/out-tsc
+Frontend-Produtos-Locais-Sobradinho/bazel-out
+
+# Node front
+/node_modules
+Frontend-Produtos-Locais-Sobradinho/npm-debug.log
+Frontend-Produtos-Locais-Sobradinho/yarn-error.log
+
+
+# IDEs and editors
+Frontend-Produtos-Locais-Sobradinho/.idea/
+Frontend-Produtos-Locais-Sobradinho/.project
+Frontend-Produtos-Locais-Sobradinho/.classpath
+Frontend-Produtos-Locais-Sobradinho/.c9/
+Frontend-Produtos-Locais-Sobradinho/*.launch
+Frontend-Produtos-Locais-Sobradinho/.settings/
+Frontend-Produtos-Locais-Sobradinho/*.sublime-workspace
+
+# Visual Studio Code
+/.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+Frontend-Produtos-Locais-Sobradinho/.history/*
+
+# Miscellaneous
+Frontend-Produtos-Locais-Sobradinho/.angular/cache/
+.angular/cache/
+./.angular/cache/17.3.2/Produtos-Locais-Sobradinho/.tsbuildinfo
+Frontend-Produtos-Locais-Sobradinho/.sass-cache/
+Frontend-Produtos-Locais-Sobradinho/connect.lock
+Frontend-Produtos-Locais-Sobradinho/coverage
+Frontend-Produtos-Locais-Sobradinho/libpeerconnection.log
+Frontend-Produtos-Locais-Sobradinho/testem.log
+Frontend-Produtos-Locais-Sobradinho/typings
+
+# System files
+Frontend-Produtos-Locais-Sobradinho/.DS_Store
+Frontend-Produtos-Locais-Sobradinho/Thumbs.db
+
+/.editorconfig
