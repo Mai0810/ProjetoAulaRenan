@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  form {
+    width: 100%; // Ajuste de acordo com a largura desejada
+    max-width: 500px; // Limita a largura máxima do formulário
+
+    .form-label {
+      font-weight: bold; // Labels em negrito
+    }
+
+    .btn-primary {
+      margin-top: 20px; // Espaço acima do botão
+      width: 100%; // Botão ocupa toda a largura do formulário
+    }
+  }
+
+  .product-management {
+    width: 100%;
+    max-width: 600px;
+
+    input {
+      flex: 1; // Inputs ocupam todo o espaço disponível
+      margin-right: 8px; // Espaço entre os inputs e os botões
+    }
+
+    .btn-danger {
+      margin-left: 5px;
+    }
+
+    .btn-success, .btn-primary {
+      width: 100%; // Botões ocupam toda a largura do formulário
+      margin-top: 10px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+  }
+
+  .btn-danger, .btn-warning {
+    width: auto;
+    padding: 0.375rem 0.75rem; // Tamanho padrão do Bootstrap para botões
+  }
+}

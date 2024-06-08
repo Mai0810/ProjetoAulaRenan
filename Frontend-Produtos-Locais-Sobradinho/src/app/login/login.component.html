@@ -1,0 +1,19 @@
+<div class="container-color vh-100">
+    <div class="row h-100 justify-content-center align-items-center">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="text-center mb-3">
+          <h1>LOGIN</h1>
+          <p>PRODUTORES LOCAIS DE ALIMENTOS DE SOBRADINHO</p>
+        </div>
+        <form [formGroup]="form">
+          <div class="mb-3">
+            <input type="email" formControlName='email' class="form-control" placeholder="Email" id="email">
+          </div>
+          <div class="mb-3">
+            <input type="password" formControlName="senha" class="form-control" placeholder="Senha" id="password">
+          </div>
+          <button type="button" (click)="submeterLogin()" class="btn btn-dark w-100">LOGIN</button>
+        </form>
+      </div>
+    </div>
+  </div>

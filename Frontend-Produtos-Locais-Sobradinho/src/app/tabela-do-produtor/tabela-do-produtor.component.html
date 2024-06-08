@@ -1,0 +1,23 @@
+<div class="container py-4">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <table class="table table-bordered">
+          <thead class="bg-secondary text-white">
+            <tr>
+              <th>Produtos</th>
+              <th>Descrição</th>
+              <th>Preço</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products">
+              <td>{{ product.name }}</td>
+              <td>{{ product.description }}</td>
+              <td>{{ product.price | currency:'BRL' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,13 @@
+<div class="container-color vh-100 d-flex flex-column justify-content-center align-items-center">
+  <h1 class="mb-4">ADMINISTRADOR</h1>
+  <p>Deseja excluir algum produtor?</p>
+  
+  <div *ngFor="let produtor of produtores; let i = index" class="d-flex align-items-center justify-content-between w-50 my-2">
+    <span>{{ produtor.nome }}</span>
+    <button (click)="excluirProdutor(i)" class="btn btn-danger">X</button>
+  </div>
+
+  <p class="mt-4">Deseja excluir sua conta?</p>
+  <button (click)="excluirConta()" class="btn btn-danger mb-2">EXCLUIR CONTA</button>
+  <button (click)="sair()" class="btn btn-warning">SAIR</button>
+</div>
