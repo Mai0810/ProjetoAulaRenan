@@ -1,10 +1,8 @@
 const express = require('express');
-const produtorController = require('../controllers/produtorController');
 const router = express.Router();
+const produtosController = require('../controllers/produtosController');
 
-
-router.post('/adicionar', produtorController.adicionarProdutor);
-router.get('/:id', produtorController.buscarProdutor)
-
+router.post('/salvar/:produtorId', produtosController.salvarProdutos);
+router.delete('/:idProduto', produtosController.removerProduto);
 
 module.exports = router;

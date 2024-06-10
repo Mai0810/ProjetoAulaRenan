@@ -14,6 +14,20 @@ const usuarioModel = {
       }
     },
 
+    async atualizarDetalhesDoUsuario(idUsuario, dadosUsuario) {
+      try {
+          const { NOME, EMAIL, SENHA } = dadosUsuario;
+          await knex('usuario')
+              .where({ ID_USUARIO: idUsuario })
+              .update({ NOME, EMAIL, SENHA});
+          return { sucesso: true, mensagem: 'Usuário atualizado com sucesso' };
+      } catch (error) {
+          console.error('Erro ao atualizar usuário:', error);
+          return { sucesso: false, mensagem: 'Erro ao atualizar usuário' };
+      }
+    }
+
+
     // findUserByEmail(email) {
     //   return knex('users').where({ email }).first();
     // },

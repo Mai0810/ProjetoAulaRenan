@@ -9,7 +9,7 @@ const SENHA_ADMIN = "soulindademais";
 exports.autenticarUsuario = ({ email, senha }) => {
   return new Promise(async (resolve, reject) => {
     const usuario = await UsuarioModel.login(email, senha);
-    console.log("retorno de  model");
+    console.log("retorno autenticar usuário");
     console.log(usuario);
     if(usuario){
         resolve(usuario);

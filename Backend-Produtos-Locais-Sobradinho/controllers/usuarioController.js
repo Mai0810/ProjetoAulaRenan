@@ -3,8 +3,6 @@ const usuarioService = require('../services/usuarioService');
 exports.autenticarUsuario = async (req, res) => {
   try {
     const usuario = await usuarioService.autenticarUsuario(req.body);
-    console.log("retorno da controller");
-    console.log(usuario);
     res.json(usuario);
   } catch (err) {
     res.status(err.status || 500).send(err.message);

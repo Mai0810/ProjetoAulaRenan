@@ -19,7 +19,7 @@ const produtorModel = {
             
             // Obter o ID do usuário inserido
             const usuarioId = idsUsuario[0];
-    
+            
             // Inserir na tabela de produtores com o ID do usuário
             const idProdutor = await trx('produtor').insert({
             DESCRICAO: dadosUsuario.DESCRICAO,
@@ -59,6 +59,20 @@ const produtorModel = {
         }catch (error) {
             console.error('Erro ao procurar produtor:', error);
             throw error;
+        }
+    },
+    
+    // Função para atualizar detalhes do produtor
+    async atualizarDetalhesDoProdutor(idUsuario, dadosProdutor) {
+        try {
+            const { DESCRICAO, TELEFONE, ENDERECO } = dadosProdutor;
+            await knex('produtor')
+                .where({ Usuario_ID_USUARIO: idUsuario }) 
+                .update({ DESCRICAO, TELEFONE, ENDERECO });
+            return { sucesso: true, mensagem: 'Detalhes do produtor atualizados com sucesso' };
+        } catch (error) {
+            console.error('Erro ao atualizar produtor:', error);
+            return { sucesso: false, mensagem: 'Erro ao atualizar produtor' };
         }
     }
 }
