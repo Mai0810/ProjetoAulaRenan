@@ -6,6 +6,9 @@ import { Usuario } from '../dto/usuario.model';
 import { Produtor } from '../dto/produtor.model';
 import { ProdutorLogadoService } from '../services/produtor-logado.service';
 import { Subscription } from 'rxjs';
+import { ProdutoDTO } from '../dto/produto.dto';
+import { ProdutosService } from '../services/produtos.service';
+
 
 @Component({
   selector: 'app-produtor',
@@ -24,15 +27,13 @@ export class ProdutorComponent implements OnInit, OnDestroy {
     TELEFONE: new FormControl('', [Validators.required, Validators.pattern('^\\d{10,11}$')])
   });
 
-  produtos = [
-    { nome: 'Batata', descricao: 'Descrição do produto', preco: 'R$ 1.00' },
-    { nome: 'Quiabo', descricao: 'Descrição do produto', preco: 'R$ 2.00' }
-  ];
+
+  produtos: ProdutoDTO[] = [ ];
 
   constructor(private route: ActivatedRoute, 
     private produtorLogadoService:ProdutorLogadoService,
-    private router: Router // Injete Router
-  ){
+    private router: Router, // Injete Router
+    private produtosService:ProdutosService ){
 
   }
 
@@ -48,27 +49,57 @@ export class ProdutorComponent implements OnInit, OnDestroy {
       this.produtorLogadoService.recuperarProdutor(usuario.ID_USUARIO).subscribe(produtor => {
         this.produtorLogadoService.setProdutor(produtor);
         this.usuarioProdutor = produtor;
+        this.setDadosForm(produtor);
+        this.produtorLogadoService.listarProdutos(produtor.ID_PRODUTOR).subscribe((res:ProdutoDTO[]) => {
+          this.produtos = res;
+        })
       });
+
     })
   }
 
+  setDadosForm(produtor: Produtor): void{
+    this.produtorForm.setValue({
+      NOME: produtor.NOME,
+      EMAIL: produtor.EMAIL,
+      DESCRICAO: produtor.DESCRICAO,
+      ENDERECO: produtor.ENDERECO,
+      SENHA: produtor.SENHA,
+      TELEFONE: produtor.TELEFONE
+    });
+  
+  }
+
   alterarDadosProdutor() {
-    
-    const produtorDadosAAlterar:Produtor = new Produtor(this.produtorForm.value);
-    console.log('Dados do Produtor:', produtorDadosAAlterar);
-    this.produtorLogadoService.alterarProdutor(produtorDadosAAlterar, this.usuarioProdutor.ID_USUARIO);
+    console.log('Dados do Produtor:', this.produtorForm.value);
+    const produtor:Produtor = new Produtor(this.produtorForm.value);
+    console.log(produtor);
+    this.produtorLogadoService.alterarProdutor(produtor, this.usuarioProdutor.ID_USUARIO).subscribe(
+      (res) => {
+        //this.produtorLogadoService.setProdutor();
+      },
+      (err) => {
+
+      }
+    )
   }
 
   adicionarProduto() {
-    this.produtos.push({ nome: '', descricao: '', preco: '' });
+    this.produtos.push({ NOME: '', DESCRICAO: '', PRECO: '' });
   }
 
-  removerProduto(index: number) {
-    this.produtos.splice(index, 1);
+  removerProduto(idProduto: number | undefined) {
+    if (confirm("Tem certeza?") && idProduto !== undefined) {
+      this.produtosService.deletar(idProduto).subscribe(res => {
+        this.produtos = this.produtos.filter(p => p.ID_PRODUTO !== idProduto);
+      });
+    } 
   }
 
   atualizarProdutos() {
-    console.log('Produtos Atualizados:', this.produtos);
+    const filtrados:ProdutoDTO[] = this.produtos.filter((p) => p.NOME.trim().length !== 0 && p.PRECO.trim().length !== 0);
+    console.log('Produtos Atualizados:', filtrados);
+    this.produtosService.atualizarProdutos(this.usuarioProdutor.ID_PRODUTOR, filtrados).subscribe(data => this.produtos = data);
   }
 
   excluirConta() {
