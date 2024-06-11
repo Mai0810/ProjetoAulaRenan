@@ -32,6 +32,10 @@ export class ProdutorLogadoService {
     return this.http.put(apiUrl, produtorDadosAAlterar);
   }
 
+   deletarProdutor(ID_PRODUTOR: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/produtor/${ID_PRODUTOR}`);
+  }
+    
 
 
   setUsuario(usuario: Usuario) {

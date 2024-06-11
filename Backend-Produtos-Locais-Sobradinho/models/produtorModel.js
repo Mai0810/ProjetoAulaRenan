@@ -38,6 +38,7 @@ const produtorModel = {
         }
     },
 
+    // ESTE ID É O ID DO USUÁRIO
     async buscarProdutorPorId(userId) {
         try{
             const resultado = await knex.transaction(async trx => {
@@ -73,6 +74,40 @@ const produtorModel = {
         } catch (error) {
             console.error('Erro ao atualizar produtor:', error);
             return { sucesso: false, mensagem: 'Erro ao atualizar produtor' };
+        }
+    },
+
+
+    async buscarIdUsuarioPorIdProdutor(idProdutor) {
+        console.log("buscar id usuario pelo id produtor>" + idProdutor)
+        try {
+            const resultado = await knex('produtor')
+              .select('Usuario_ID_USUARIO')
+              .where('ID_PRODUTOR', idProdutor)
+              .first();
+        
+            // Se resultado é um array e queremos garantir que pegamos apenas um resultado
+            if (resultado) {
+              return resultado.Usuario_ID_USUARIO; // Retorna o primeiro (e, presumivelmente, único) `Usuario_ID_USUARIO`
+            } else {
+              return null; // Retorna null se nenhum produtor foi encontrado
+            }
+          } catch (error) {
+            console.error('Erro ao buscar Usuario_ID_USUARIO:', error);
+            throw error; // Lançar o erro para cima permite que o chamador lide com ele
+          }
+    },
+
+    async removerProdutor(idProdutor) {
+        try {
+            console.log("removendo produtor no banco: id-produtor:" + idProdutor);
+            await knex('produtor').delete().where({
+                ID_PRODUTOR: idProdutor
+            });
+            return { sucesso: true, mensagem: 'Produtor excluído com sucesso' };
+        } catch (error) {
+            console.error('Erro ao excluir produtor:', error);
+            return { sucesso: false, mensagem: 'Erro ao excluir produtor' };
         }
     }
 }

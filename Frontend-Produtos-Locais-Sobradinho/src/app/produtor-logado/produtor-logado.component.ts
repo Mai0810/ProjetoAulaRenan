@@ -84,6 +84,23 @@ export class ProdutorComponent implements OnInit, OnDestroy {
     )
   }
 
+  removerProdutor() {
+    this.produtorLogadoService.deletarProdutor(this.usuarioProdutor.ID_PRODUTOR).subscribe({
+      next: (res) => {
+        this.produtorLogadoService.setProdutor(null as unknown as Produtor);
+        this.router.navigate(['/login'])
+      },
+      error: (err) => alert('Erro ao excluir produtor!')
+    });
+  }
+
+
+
+
+
+
+
+
   adicionarProduto() {
     this.produtos.push({ NOME: '', DESCRICAO: '', PRECO: '' });
   }

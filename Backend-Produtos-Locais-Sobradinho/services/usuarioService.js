@@ -22,3 +22,7 @@ exports.autenticarUsuario = ({ email, senha }) => {
   });
 };
 
+exports.deletarUsuario = async (idUsuario) => {
+  return UsuarioModel.deleteUsuario(idUsuario);
+}
+

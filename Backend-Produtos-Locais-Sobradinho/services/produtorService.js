@@ -1,5 +1,6 @@
 const ProdutorModel = require('../models/produtorModel');
 const UsuarioModel = require('../models/usuarioModel');
+const UsuarioService = require('./usuarioService');
 
 
 exports.adicionarProdutor = ({ NOME, EMAIL, SENHA, DESCRICAO, ENDERECO, TELEFONE, ID_PRODUTOR }) => {
@@ -20,7 +21,7 @@ exports.atualizarProdutor = async (idUsuario, dadosUsuarioProdutor) => {
 
     const { DESCRICAO, TELEFONE, ENDERECO } = dadosUsuarioProdutor;
        // Atualizar detalhes do produtor
-    const resultadoProdutor = await ProdutorModel. atualizarDetalhesDoProdutor(idUsuario, { DESCRICAO, TELEFONE, ENDERECO });
+    const resultadoProdutor = await ProdutorModel.atualizarDetalhesDoProdutor(idUsuario, { DESCRICAO, TELEFONE, ENDERECO });
     if (!resultadoProdutor.sucesso) {
         throw new Exception({msg:resultadoProdutor});
     }
@@ -31,3 +32,16 @@ exports.atualizarProdutor = async (idUsuario, dadosUsuarioProdutor) => {
     };
     return status;
 }
+
+
+exports.removerProdutor = async (idProdutor) => {
+    let idUsuario = await ProdutorModel.buscarIdUsuarioPorIdProdutor(idProdutor);
+    if(idUsuario){
+        const res = await ProdutorModel.removerProdutor(idProdutor);
+        console.log("id usuario a remover:" + idUsuario);
+        const a = await UsuarioService.deletarUsuario(idUsuario);
+        return res;
+    }else {
+        throw new Error("Usuario não encontrado para remover");
+    }
+};

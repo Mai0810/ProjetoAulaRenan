@@ -28,6 +28,16 @@ exports.alterarDados = async (req, res) => {
       res.json(produtor);
   } catch (err) {
     res.status(err.status || 500).send(err.message);
-  }
-  
+  } 
 }
+
+  //excluir produtor
+exports.removerProdutor = async (req, res) => {
+    try {
+       const body = await produtorService.removerProdutor(req.params.idProdutor);
+        res.status(200).json(body);
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao remover produtor', error: error.message });
+    }
+
+};

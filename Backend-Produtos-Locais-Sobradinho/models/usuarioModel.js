@@ -25,6 +25,11 @@ const usuarioModel = {
           console.error('Erro ao atualizar usuário:', error);
           return { sucesso: false, mensagem: 'Erro ao atualizar usuário' };
       }
+    },
+
+    async deleteUsuario(id) {
+      console.log("remover usuário com id: " + id);
+      return knex('usuario').delete().where({ ID_USUARIO: id });
     }
 
 
