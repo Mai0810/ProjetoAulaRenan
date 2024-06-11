@@ -11,9 +11,9 @@
           </thead>
           <tbody>
             <tr *ngFor="let product of products">
-              <td>{{ product.name }}</td>
-              <td>{{ product.description }}</td>
-              <td>{{ product.price | currency:'BRL' }}</td>
+              <td>{{ product.NOME }}</td>
+              <td>{{ product.DESCRICAO }}</td>
+              <td>{{ product.PRECO | currency:'BRL' }}</td>
             </tr>
           </tbody>
         </table>

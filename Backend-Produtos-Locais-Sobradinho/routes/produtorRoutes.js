@@ -5,6 +5,7 @@ const router = express.Router();
 
 
 router.post('/adicionar', produtorController.adicionarProdutor);
+router.get('/produtores', produtorController.buscarProdutores);
 router.get('/:id', produtorController.buscarProdutor)
 router.get('/:produtorId/produtos', produtosController.listarProdutos);
 router.put('/:idUsuario', produtorController.alterarDados);

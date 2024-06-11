@@ -1,6 +1,7 @@
 const ProdutorModel = require('../models/produtorModel');
 const UsuarioModel = require('../models/usuarioModel');
 const UsuarioService = require('./usuarioService');
+const ProdutosService = require('./produtosService');
 
 
 exports.adicionarProdutor = ({ NOME, EMAIL, SENHA, DESCRICAO, ENDERECO, TELEFONE, ID_PRODUTOR }) => {
@@ -33,7 +34,7 @@ exports.atualizarProdutor = async (idUsuario, dadosUsuarioProdutor) => {
     return status;
 }
 
-
+//remover produtor
 exports.removerProdutor = async (idProdutor) => {
     let idUsuario = await ProdutorModel.buscarIdUsuarioPorIdProdutor(idProdutor);
     if(idUsuario){
@@ -43,5 +44,25 @@ exports.removerProdutor = async (idProdutor) => {
         return res;
     }else {
         throw new Error("Usuario não encontrado para remover");
+    }
+
+}
+
+//buscar produtores
+exports.produtoresHome = async () => {
+    let resposta = await ProdutorModel.buscarProdutoresHome();
+    if(resposta && resposta.sucesso){
+        const promessas =  resposta.dados.map(async (produtor) => {
+            // Carrega os produtos para o item
+            const produtos = await ProdutosService.listar(produtor.ID_PRODUTOR);
+            // Adiciona os produtos carregados ao item
+            return {...produtor, produtos};
+        });
+        console.log(promessas);
+        const resultados = await Promise.all(promessas);
+        resposta.dados = resultados;
+        return resposta;
+    }else {
+        return resposta;
     }
 };

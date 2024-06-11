@@ -1,5 +1,7 @@
 const knex = require('../config/db'); // Importa a configuração de conexão
 
+const TABELA_PRODUTOR = "produtor";
+
 const produtorModel = {
 
 
@@ -42,7 +44,7 @@ const produtorModel = {
     async buscarProdutorPorId(userId) {
         try{
             const resultado = await knex.transaction(async trx => {
-                const produtor = await trx('produtor')
+                const produtor = await trx(TABELA_PRODUTOR)
                     .select('produtor.*', 'usuario.*')
                     .leftJoin('usuario', 'usuario.ID_USUARIO', 'produtor.Usuario_ID_USUARIO')
                     .where('usuario.ID_USUARIO', userId)
@@ -67,7 +69,7 @@ const produtorModel = {
     async atualizarDetalhesDoProdutor(idUsuario, dadosProdutor) {
         try {
             const { DESCRICAO, TELEFONE, ENDERECO } = dadosProdutor;
-            await knex('produtor')
+            await knex(TABELA_PRODUTOR)
                 .where({ Usuario_ID_USUARIO: idUsuario }) 
                 .update({ DESCRICAO, TELEFONE, ENDERECO });
             return { sucesso: true, mensagem: 'Detalhes do produtor atualizados com sucesso' };
@@ -81,7 +83,7 @@ const produtorModel = {
     async buscarIdUsuarioPorIdProdutor(idProdutor) {
         console.log("buscar id usuario pelo id produtor>" + idProdutor)
         try {
-            const resultado = await knex('produtor')
+            const resultado = await knex(TABELA_PRODUTOR)
               .select('Usuario_ID_USUARIO')
               .where('ID_PRODUTOR', idProdutor)
               .first();
@@ -101,7 +103,7 @@ const produtorModel = {
     async removerProdutor(idProdutor) {
         try {
             console.log("removendo produtor no banco: id-produtor:" + idProdutor);
-            await knex('produtor').delete().where({
+            await knex(TABELA_PRODUTOR).delete().where({
                 ID_PRODUTOR: idProdutor
             });
             return { sucesso: true, mensagem: 'Produtor excluído com sucesso' };
@@ -109,7 +111,22 @@ const produtorModel = {
             console.error('Erro ao excluir produtor:', error);
             return { sucesso: false, mensagem: 'Erro ao excluir produtor' };
         }
+    },
+
+    // buscar produtores
+    async buscarProdutoresHome() {
+        try {
+            const produtores = await knex(TABELA_PRODUTOR).select('NOME', 'ID_PRODUTOR', 'Usuario_ID_USUARIO', 'ENDERECO', 'TELEFONE')
+            .leftJoin('usuario', 'usuario.ID_USUARIO', 'produtor.Usuario_ID_USUARIO')
+            .where({ADMIN: 0})
+            console.log("Buscando produtores no banco +" + produtores);
+            return { sucesso: true, dados: produtores, mensagem: 'Produtores encontrados com sucesso' };
+        } catch (erro) {
+            console.error('Erro ao buscar produtores:', erro);
+            return { sucesso: false, mensagem: 'Erro ao buscar produtores' };
+        }
     }
+
 }
 
 module.exports = produtorModel;

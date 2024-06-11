@@ -39,5 +39,14 @@ exports.removerProdutor = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Erro ao remover produtor', error: error.message });
     }
+};
 
+//buscar produtores
+exports.buscarProdutores = async (req, res) => {
+    const resultado = await produtorService.produtoresHome();
+    if (resultado.sucesso) {
+        res.json(resultado);
+    } else {
+        res.status(500).json(resultado);
+    }
 };

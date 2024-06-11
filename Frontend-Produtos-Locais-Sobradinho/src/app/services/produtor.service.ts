@@ -15,5 +15,9 @@ export class ProdutorService {
     .pipe(map(data => new Produtor(data)));
 
   }
+
+  getProdutores(): Observable<any> {
+    return this.http.get('http://localhost:5000/produtor/produtores');
+  }
 }
 
